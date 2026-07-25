@@ -1,0 +1,60 @@
+{
+  "protein": "Human apolipoprotein E",
+  "uniprot_accession": "P02649",
+  "uniprot_source": "https://rest.uniprot.org/uniprotkb/P02649.fasta",
+  "retrieved_utc": "2026-07-25T19:05:47+00:00",
+  "sequence_length": 317,
+  "numbering_convention": "pre-protein (signal peptide included); UniProt P02649 canonical",
+  "signal_peptide": {
+    "start": 1,
+    "end": 18,
+    "length": 18,
+    "source_url": "https://rest.uniprot.org/uniprotkb/P02649.json"
+  },
+  "mature_equivalents": {
+    "130": 112,
+    "176": 158
+  },
+  "variable_positions": [
+    130,
+    176
+  ],
+  "dbsnp_verification": {
+    "rs429358": {
+      "position": 130,
+      "reference_residue": "C",
+      "alternate_residue": "R",
+      "refseq_protein": "NP_000032.1"
+    },
+    "rs7412": {
+      "position": 176,
+      "reference_residue": "R",
+      "alternate_residue": "C",
+      "refseq_protein": "NP_000032.1"
+    }
+  },
+  "reference_allele": "APOE-e3",
+  "variants": {
+    "APOE-e2": {
+      "substitutions": {
+        "130": "C",
+        "176": "C"
+      },
+      "sequence": "MKVLWAALLVTFLAGCQAKVEQAVETEPEPELRQQTEWQSGQRWELALGRFWDYLRWVQTLSEQVQEELLSSQVTQELRALMDETMKELKAYKSELEEQLTPVAEETRARLSKELQAAQARLGADMEDVCGRLVQYRGEVQAMLGQSTEELRVRLASHLRKLRKRLLRDADDLQKCLAVYQAGAREGAERGLSAIRERLGPLVEQGRVRAATVGSLAGQPLQERAQAWGERLRARMEEMGSRTRDRLDEVKEQVAEVRAKLEEQAQQIRLQAEAFQARLKSWFEPLVEDMQRQWAGLVEKVQAAVGTSAAPVPSDNH"
+    },
+    "APOE-e3": {
+      "substitutions": {
+        "130": "C",
+        "176": "R"
+      },
+      "sequence": "MKVLWAALLVTFLAGCQAKVEQAVETEPEPELRQQTEWQSGQRWELALGRFWDYLRWVQTLSEQVQEELLSSQVTQELRALMDETMKELKAYKSELEEQLTPVAEETRARLSKELQAAQARLGADMEDVCGRLVQYRGEVQAMLGQSTEELRVRLASHLRKLRKRLLRDADDLQKRLAVYQAGAREGAERGLSAIRERLGPLVEQGRVRAATVGSLAGQPLQERAQAWGERLRARMEEMGSRTRDRLDEVKEQVAEVRAKLEEQAQQIRLQAEAFQARLKSWFEPLVEDMQRQWAGLVEKVQAAVGTSAAPVPSDNH"
+    },
+    "APOE-e4": {
+      "substitutions": {
+        "130": "R",
+        "176": "R"
+      },
+      "sequence": "MKVLWAALLVTFLAGCQAKVEQAVETEPEPELRQQTEWQSGQRWELALGRFWDYLRWVQTLSEQVQEELLSSQVTQELRALMDETMKELKAYKSELEEQLTPVAEETRARLSKELQAAQARLGADMEDVRGRLVQYRGEVQAMLGQSTEELRVRLASHLRKLRKRLLRDADDLQKRLAVYQAGAREGAERGLSAIRERLGPLVEQGRVRAATVGSLAGQPLQERAQAWGERLRARMEEMGSRTRDRLDEVKEQVAEVRAKLEEQAQQIRLQAEAFQARLKSWFEPLVEDMQRQWAGLVEKVQAAVGTSAAPVPSDNH"
+    }
+  }
+}
