@@ -2,7 +2,7 @@
   "protein": "Human apolipoprotein E",
   "uniprot_accession": "P02649",
   "uniprot_source": "https://rest.uniprot.org/uniprotkb/P02649.fasta",
-  "retrieved_utc": "2026-07-25T19:05:47+00:00",
+  "retrieved_utc": "2026-07-25T19:20:23+00:00",
   "sequence_length": 317,
   "numbering_convention": "pre-protein (signal peptide included); UniProt P02649 canonical",
   "signal_peptide": {
