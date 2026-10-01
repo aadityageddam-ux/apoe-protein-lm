@@ -8,6 +8,8 @@
 
 This is a negative result and is reported as such. It is a confirmatory computational experiment, not exploratory discovery — one protein, three known variants, one testable question.
 
+![ESM-2 zero-shot scores by APOE allele: the model ranks e4 > e3 > e2, the reverse of the clinical direction, under both the masked-marginal score and the delta-LLR check.](results/scores.png)
+
 ---
 
 ## The question
@@ -173,6 +175,8 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 *All citations retrieved from PubMed on 2026-07-25.*
 
 **Data sources.** UniProt [P02649](https://www.uniprot.org/uniprotkb/P02649) (sequence); NCBI dbSNP [rs429358](https://www.ncbi.nlm.nih.gov/snp/rs429358) and [rs7412](https://www.ncbi.nlm.nih.gov/snp/rs7412) (numbering verification). Both retrieved programmatically at run time — see `data/variants.json` for retrieval timestamps.
+
+<!-- TODO(Aaditya): add an AI-assistance note here (the HDAC1 repo has one). AI_USAGE.md is yours to write. -->
 
 ## License
 
