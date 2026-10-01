@@ -1,5 +1,7 @@
 # APOE variant scoring with a protein language model
 
+[![Verify](https://github.com/aadityageddam-ux/apoe-protein-lm/actions/workflows/verify.yml/badge.svg)](https://github.com/aadityageddam-ux/apoe-protein-lm/actions/workflows/verify.yml)
+
 **Does a protein language model that has never seen human aging or clinical data independently recover the best-replicated human longevity association?**
 
 **Result: no.** ESM-2's zero-shot ranking of the three human APOE alleles is **ε4 > ε3 > ε2** — monotonically *inverted* relative to the established clinical direction, under two independent scoring formulations, by roughly three orders of magnitude in per-residue probability.
@@ -34,7 +36,7 @@ Model ranking: **ε4 > ε3 > ε2.** Clinical ranking: **ε2 > ε3 > ε4.** Exact
 
 The cause is visible directly in the model's predictions. With either site masked, ESM-2 assigns Arg — the ε4 residue at both positions — about 1,350× (position 130) and 5,200× (position 176) more probability than Cys. ε4 is Arg/Arg and therefore scores highest; ε2 is Cys/Cys and scores lowest.
 
-The ranking rests entirely on these sequence scores. The structure predictions contribute nothing to it. ESMFold's confidence on APOE is low — mean pLDDT ≈ 64, with only ~16–20% of residues above the conventional 70 threshold — and while the variants differ by 6–10 Å global Cα RMSD, that collapses to ~1 Å over the 47 residues all three models predict confidently. The deviation is concentrated at the termini, in the pattern expected from the two domains being placed differently relative to one another rather than from any local change at residues 130 or 176. A single point substitution is not separable from single-sequence prediction noise at this confidence. **No structural claim is made in either direction**; the structures are included for completeness and visual inspection only.
+The ranking rests entirely on these sequence scores. The structure predictions contribute nothing to it. ESMFold's confidence on APOE is low — mean pLDDT ≈ 64, with only ~16–20% of residues above the conventional 70 threshold — and while the variants differ by 6–11 Å global Cα RMSD, that collapses to ~1 Å over the 47 residues all three models predict confidently. The deviation is concentrated at the termini, in the pattern expected from the two domains being placed differently relative to one another rather than from any local change at residues 130 or 176. A single point substitution is not separable from single-sequence prediction noise at this confidence. **No structural claim is made in either direction**; the structures are included for completeness and visual inspection only.
 
 ### Interpretation
 
@@ -62,6 +64,27 @@ APOE variant positions appear in the literature under two conventions — **matu
 - **dbSNP** records for the two ε-defining SNPs, queried live from NCBI E-utilities: `rs429358` = `NP_000032.1:p.Cys130Arg` and `rs7412` = `NP_000032.1:p.Arg176Cys`.
 
 The notebook asserts that the residues dbSNP names as reference (Cys130, Arg176) are exactly what the downloaded sequence contains, and that the two positions match the signal-peptide offset. It halts if either check fails. **Resolved convention: pre-protein numbering, positions 130 and 176.** The canonical UniProt sequence is the ε3 allele.
+
+## Checking the numbers
+
+Every number quoted above is re-derived from the committed artifacts by a script, and the
+pipeline's pure functions are covered by offline unit tests. Neither needs an API token, so
+anyone can check the claims without re-running the models:
+
+```bash
+pip install -r requirements.txt
+python -m pytest tests -v            # 27 unit tests: substitution, PDB parsing, Kabsch fit
+python scripts/verify_results.py     # 53 checks against results/ and data/variants.json
+```
+
+`scripts/verify_results.py` re-derives the score totals, the model and clinical rankings, the
+Arg:Cys probability ratios, the pLDDT statistics, the size of the confident core and the Cα
+RMSDs, then checks each against the figures quoted in this README. It exits non-zero if any of
+them disagree. Both run in CI on every push.
+
+This establishes that the write-up matches the run it came from. It does **not** re-run the
+Hugging Face or ESMFold calls, so it cannot show that a fresh run today would land on the same
+numbers — see the last limitation below.
 
 ## Reproducing it
 
@@ -111,6 +134,10 @@ apoe-protein-lm/
 │   ├── fetch_sequence.py       # UniProt retrieval + substitution helpers
 │   ├── score_variant.py        # ESM-2 zero-shot scoring (generic)
 │   └── fold_sequence.py        # ESMFold API + PDB handling + superposition (generic)
+├── scripts/
+│   └── verify_results.py       # Re-derives every README number from the artifacts
+├── tests/
+│   └── test_pipeline.py        # Offline unit tests for the pure functions
 ├── data/
 │   └── variants.json           # The 3 sequences + numbering provenance and dbSNP verification
 ├── results/
@@ -133,7 +160,7 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 - **n = 3.** One protein, three variants, one model. A single case study — not a benchmark, not a statistically powered test, and not a general claim about protein language models.
 - **In silico only.** Nothing here is experimentally validated. Every number in this repository is a model prediction and constitutes no biological finding beyond "this is what the model predicts."
 - **APOE biology is not captured by point-substitution scoring.** These scores treat the protein as an isolated sequence; the ε2 allele's effects have been characterised at the level of lipid metabolism in carriers ([PMID 35997888](https://pubmed.ncbi.nlm.nih.gov/35997888/)), a level of biology entirely outside what a single-sequence model represents.
-- **Reproducibility is for the method, not bit-exact numbers.** Scores come from the Hugging Face Inference API, where I did not pin the model revision, so a rerun months later may differ slightly or fail if the hosted model changes. The committed `results/` and `data/variants.json` are the run behind every number above; I rechecked that the quoted ratios and totals follow from `results/scores.csv`, but I have not re-run the live API calls since the original run.
+- **Reproducibility is for the method, not bit-exact numbers.** Scores come from the Hugging Face Inference API, where I did not pin the model revision, so a rerun months later may differ slightly or fail if the hosted model changes. The committed `results/` and `data/variants.json` are the run behind every number above, and `scripts/verify_results.py` checks that the write-up matches them, but I have not re-run the live API calls since the original run. I also did not record the model revision that run resolved to, so a mismatch later could not be attributed.
 
 ## Citations
 

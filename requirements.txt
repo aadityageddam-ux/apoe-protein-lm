@@ -1,3 +1,9 @@
+# Lower bounds are the minimum versions the code is written against.
+# The offline checks (tests/ and scripts/verify_results.py) were last run green on
+# 2026-10-01 with: requests 2.32.3, numpy 2.2.6, pandas 2.2.3, matplotlib 3.10.8,
+# py3Dmol 2.5.5, python-dotenv 1.2.1, notebook 7.6.1, ipykernel 7.3.0, pytest 9.0.2
+# on CPython 3.13.5. The original API run predates that record, so these are not
+# a claim about the environment the committed results were produced in.
 requests>=2.31
 numpy>=1.24
 pandas>=2.0
@@ -6,3 +12,6 @@ py3Dmol>=2.0
 python-dotenv>=1.0
 notebook>=7.0
 ipykernel>=6.0
+
+# Offline checks only (not needed to run the notebook):
+pytest>=7.4
