@@ -8,6 +8,8 @@
 
 This is a negative result and is reported as such. It is a confirmatory computational experiment, not exploratory discovery — one protein, three known variants, one testable question.
 
+**Why it inverts:** the ε4 allele (Arg112/Arg158) is the *ancestral* state — the 24 chimpanzees and other primates analysed in the original study were all ε4-like (Hanlon & Rubinsztein 1995). A model that scores evolutionary typicality is therefore expected to favor ε4, so this experiment shows ESM-2 tracking sequence typicality at this locus, not clinical effect.
+
 ![ESM-2 zero-shot scores by APOE allele: the model ranks e4 > e3 > e2, the reverse of the clinical direction, under both the masked-marginal score and the delta-LLR check.](results/scores.png)
 
 ---
@@ -44,9 +46,9 @@ The ranking rests entirely on these sequence scores. The structure predictions c
 
 ESM-2's training objective is to predict residues from evolutionary sequence context, so its scores measure how *typical* a residue is in the protein universe it was trained on. That is not the same quantity as an effect on human healthspan, and here the two point in opposite directions.
 
-The practical takeaway: **zero-shot protein-language-model fitness scores should not be treated as a proxy for human longevity effects at this locus.** A single case study cannot show this generalises, but it is a clean counterexample to the assumption.
+The practical takeaway: **zero-shot protein-language-model fitness scores should not be treated as a proxy for human longevity effects at this locus.** A single case study cannot show this generalises, but it shows the assumption failing at a locus where the evolutionarily ancestral allele is the clinically unfavorable one.
 
-One hypothesis for the inversion — that Arg is the residue favoured across the evolutionary distribution the model was trained on, regardless of its consequences in humans — is **explicitly flagged as an untested hypothesis**, not a claim. The citation set backing this project does not cover APOE allele ancestry or cross-species conservation, and testing it would require a separate analysis of APOE orthologues.
+The inversion has a known explanation: ε4 (Arg112/Arg158) is the ancestral allele in humans, with chimpanzees and the other primates examined all ε4-like (Hanlon & Rubinsztein 1995, citation 6). A model trained on evolutionary sequence data should score that state highest, which is what it does. This repository does not test the ancestry explanation directly — doing so would require scoring APOE orthologues — and with n = 3 it cannot support a general claim about protein language models.
 
 ## Method
 
@@ -171,8 +173,9 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 3. Ryu S, Atzmon G, Barzilai N, Raghavachari N, Suh Y. Genetic landscape of APOE in human longevity revealed by high-throughput sequencing. *Mech Ageing Dev.* 2016;155:7-9. doi:[10.1016/j.mad.2016.02.010](https://doi.org/10.1016/j.mad.2016.02.010). PMID: [26930295](https://pubmed.ncbi.nlm.nih.gov/26930295/).
 4. Sebastiani P, Song Z, Ellis D, et al. A metabolomic signature of the APOE2 allele. *GeroScience.* 2022;45(1):415-426. doi:[10.1007/s11357-022-00646-9](https://doi.org/10.1007/s11357-022-00646-9). PMID: [35997888](https://pubmed.ncbi.nlm.nih.gov/35997888/).
 5. Lin Z, Akin H, Rao R, et al. Evolutionary-scale prediction of atomic-level protein structure with a language model. *Science.* 2023;379(6637):1123-1130. doi:[10.1126/science.ade2574](https://doi.org/10.1126/science.ade2574). PMID: [36927031](https://pubmed.ncbi.nlm.nih.gov/36927031/).
+6. Hanlon CS, Rubinsztein DC. Arginine residues at codons 112 and 158 in the apolipoprotein E gene correspond to the ancestral state in humans. *Atherosclerosis.* 1995;112(1):85-90. doi:[10.1016/0021-9150(94)05402-5](https://doi.org/10.1016/0021-9150(94)05402-5) · [PMID 7772071](https://pubmed.ncbi.nlm.nih.gov/7772071/)
 
-*All citations retrieved from PubMed on 2026-07-25.*
+*Citations 1–5 retrieved from PubMed on 2026-07-25; citation 6 on 2026-10-01.*
 
 **Data sources.** UniProt [P02649](https://www.uniprot.org/uniprotkb/P02649) (sequence); NCBI dbSNP [rs429358](https://www.ncbi.nlm.nih.gov/snp/rs429358) and [rs7412](https://www.ncbi.nlm.nih.gov/snp/rs7412) (numbering verification). Both retrieved programmatically at run time — see `data/variants.json` for retrieval timestamps.
 
