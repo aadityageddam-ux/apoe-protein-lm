@@ -182,6 +182,7 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 ## AI assistance
 
 Built with AI assistance from Claude (Anthropic): every commit carries a Claude co-author trailer.
+[`AI_USAGE.md`](AI_USAGE.md) records what I asked for, what the model did, and what went wrong.
 Claude co-wrote the scoring and structure code in `src/`, the charts, the verification script, the
 unit tests and CI, and drafts of this README. The numbers quoted here are checked against
 `results/` by `scripts/verify_results.py`, which tests internal consistency; it does not re-run
