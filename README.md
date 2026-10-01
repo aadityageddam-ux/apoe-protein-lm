@@ -68,7 +68,7 @@ The notebook asserts that the residues dbSNP names as reference (Cys130, Arg176)
 Everything runs on free-tier resources: no paid API, no paid compute, no local GPU, no local model weights. The only credential is a free Hugging Face token (read scope is sufficient).
 
 ```bash
-git clone https://github.com/<your-username>/apoe-protein-lm.git
+git clone https://github.com/aadityageddam-ux/apoe-protein-lm.git
 ```
 
 ```bash
@@ -133,6 +133,7 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 - **n = 3.** One protein, three variants, one model. A single case study — not a benchmark, not a statistically powered test, and not a general claim about protein language models.
 - **In silico only.** Nothing here is experimentally validated. Every number in this repository is a model prediction and constitutes no biological finding beyond "this is what the model predicts."
 - **APOE biology is not captured by point-substitution scoring.** These scores treat the protein as an isolated sequence; the ε2 allele's effects have been characterised at the level of lipid metabolism in carriers ([PMID 35997888](https://pubmed.ncbi.nlm.nih.gov/35997888/)), a level of biology entirely outside what a single-sequence model represents.
+- **Reproducibility is for the method, not bit-exact numbers.** Scores come from the Hugging Face Inference API, where I did not pin the model revision, so a rerun months later may differ slightly or fail if the hosted model changes. The committed `results/` and `data/variants.json` are the run behind every number above; I rechecked that the quoted ratios and totals follow from `results/scores.csv`, but I have not re-run the live API calls since the original run.
 
 ## Citations
 
@@ -145,3 +146,7 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 *All citations retrieved from PubMed on 2026-07-25.*
 
 **Data sources.** UniProt [P02649](https://www.uniprot.org/uniprotkb/P02649) (sequence); NCBI dbSNP [rs429358](https://www.ncbi.nlm.nih.gov/snp/rs429358) and [rs7412](https://www.ncbi.nlm.nih.gov/snp/rs7412) (numbering verification). Both retrieved programmatically at run time — see `data/variants.json` for retrieval timestamps.
+
+## License
+
+Code and results: MIT (see `LICENSE`). Input data are retrieved from UniProt (CC BY 4.0) and NCBI dbSNP at run time; ESM-2 and ESMFold are by Meta AI (MIT-licensed releases) and are accessed through hosted free-tier APIs.
