@@ -179,7 +179,15 @@ Note: GitHub's notebook renderer strips JavaScript, so the interactive 3D overla
 
 **Data sources.** UniProt [P02649](https://www.uniprot.org/uniprotkb/P02649) (sequence); NCBI dbSNP [rs429358](https://www.ncbi.nlm.nih.gov/snp/rs429358) and [rs7412](https://www.ncbi.nlm.nih.gov/snp/rs7412) (numbering verification). Both retrieved programmatically at run time — see `data/variants.json` for retrieval timestamps.
 
-<!-- TODO(Aaditya): add an AI-assistance note here (the HDAC1 repo has one). AI_USAGE.md is yours to write. -->
+## AI assistance
+
+Built with AI assistance from Claude (Anthropic): every commit carries a Claude co-author trailer.
+Claude co-wrote the scoring and structure code in `src/`, the charts, the verification script, the
+unit tests and CI, and drafts of this README. The numbers quoted here are checked against
+`results/` by `scripts/verify_results.py`, which tests internal consistency; it does not re-run
+the live ESM-2 and ESMFold API calls. The explanation of the inversion (ε4 is the ancestral
+allele) was added after the claim was checked against the literature (citation 6) rather than
+assumed.
 
 ## License
 
